@@ -1,17 +1,19 @@
 import express from 'express';
-import routes from './routes/index.js';
-import db from './config/connection.js';
+import mongooseConnection from './config/connection';
+import apiRoutes from './routes';
 
-await db();
-
-const PORT = process.env.PORT || 3001;
 const app = express();
+const PORT = process.env.PORT || 3001;
 
-app.use(express.urlencoded({ extended: true}));
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(routes);
+// API Routes
+app.use('/api', apiRoutes);
 
-app.listen(PORT, () => {
-  console.log(`API server running on port ${PORT}!`);
+// Start server after DB connects
+mongooseConnection.once('open', () => {
+  console.log('🟢 Connected to MongoDB');
+  app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
 });
