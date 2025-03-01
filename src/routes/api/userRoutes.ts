@@ -1,22 +1,30 @@
 import { Router } from 'express';
-import userController from '../../controllers/userController';
+import {
+    getUsers,
+    createUser,
+    getUserById,
+    updateUser,
+    deleteUser,
+    addFriend,
+    removeFriend,
+} from '../../controllers/userController.js';
 
 const router = Router();
 
 // /api/users
 router.route('/')
-  .get(userController.getUsers)     // Get all users
-  .post(userController.createUser); // Create a user
+    .get(getUsers)     // Get all users
+    .post(createUser); // Create a user
 
 // /api/users/:id
 router.route('/:id')
-  .get(userController.getUserById)    // Get single user
-  .put(userController.updateUser)     // Update user
-  .delete(userController.deleteUser); // Delete user
+    .get(getUserById)    // Get single user
+    .put(updateUser)     // Update user
+    .delete(deleteUser); // Delete user
 
 // /api/users/:userId/friends/:friendId
 router.route('/:userId/friends/:friendId')
-  .post(userController.addFriend)     // Add friend
-  .delete(userController.removeFriend); // Remove friend
+    .post(addFriend)     // Add friend
+    .delete(removeFriend); // Remove friend
 
 export default router;

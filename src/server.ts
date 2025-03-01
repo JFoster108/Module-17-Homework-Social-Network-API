@@ -1,6 +1,6 @@
 import express from 'express';
 import mongooseConnection from './config/connection';
-import apiRoutes from './routes';
+import routes from './routes/index.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // API Routes
-app.use('/api', apiRoutes);
+app.use(routes);
 
 // Start server after DB connects
 mongooseConnection.once('open', () => {
