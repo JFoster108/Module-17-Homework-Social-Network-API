@@ -1,10 +1,22 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const connectionString = 'mongodb://127.0.0.1:27017/socialNetworkDB';
+dotenv.config(); // Load environment variables from .env
 
-mongoose.connect(connectionString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-} as mongoose.ConnectOptions);
+const connectionString = process.env.MONGODB_CONNECTION_STRING;
 
-export default mongoose.connection;
+if (!connectionString) {
+  throw new Error('MONGODB_CONNECTION_STRING is not defined in .env');
+}
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(connectionString);
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1); // Exit process with failure
+  }
+};
+
+export { connectDB, mongoose };
