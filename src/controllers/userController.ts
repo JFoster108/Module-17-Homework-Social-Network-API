@@ -17,7 +17,8 @@ import Thought from '../models/Thought';
     try {
       const user = await User.findById(req.params.id).populate('thoughts').populate('friends');
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'User not found' });
+        return;
       }
       res.json(user);
     } catch (err) {
@@ -40,7 +41,8 @@ import Thought from '../models/Thought';
     try {
       const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
       if (!updatedUser) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'User not found' });
+        return;
       }
       res.json(updatedUser);
     } catch (err) {
@@ -53,7 +55,8 @@ import Thought from '../models/Thought';
     try {
       const user = await User.findByIdAndDelete(req.params.id);
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'User not found' });
+        return;
       }
 
       // Delete associated thoughts
@@ -74,7 +77,8 @@ import Thought from '../models/Thought';
         { new: true }
       );
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'User not found' });
+        return;
       }
       res.json(user);
     } catch (err) {
@@ -91,7 +95,8 @@ import Thought from '../models/Thought';
         { new: true }
       );
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'User not found' });
+        return;
       }
       res.json(user);
     } catch (err) {
