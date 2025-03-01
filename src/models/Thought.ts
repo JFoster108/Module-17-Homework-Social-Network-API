@@ -1,5 +1,5 @@
 import { Schema, model, Document } from 'mongoose';
-import reactionSchema, { IReaction } from './Reaction';
+import reactionSchema, { IReaction } from './Reaction.js';
 
 // Define TypeScript interface for Thought
 export interface IThought extends Document {

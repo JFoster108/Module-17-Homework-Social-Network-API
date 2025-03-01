@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import Thought from '../models/Thought';
-import User from '../models/User';
+import Thought from '../models/Thought.js';
+import User from '../models/User.js';
 
 // GET all thoughts
-export const getThoughts = async (req: Request, res: Response) => {
+export const getThoughts = async (_req: Request, res: Response) => {
     try {
         const thoughts = await Thought.find();
         res.json(thoughts);

@@ -1,6 +1,5 @@
-import mongoose from 'mongoose';
-import User from '../models/User';
-import Thought from '../models/Thought';
+import User from '../models/User.js';
+import Thought from '../models/Thought.js';
 
 const seedUsers = [
   {
@@ -33,16 +32,8 @@ const seedThoughts = [
 ];
 
 // Seed function
-const seedDatabase = async () => {
+export const seedDatabase = async () => {
   try {
-    // Connect to MongoDB
-    await mongoose.connect('mongodb://127.0.0.1:27017/socialNetworkDB', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as mongoose.ConnectOptions);
-
-    console.log('📡 Connected to MongoDB');
-
     // Clear existing data
     await User.deleteMany({});
     await Thought.deleteMany({});
@@ -65,16 +56,11 @@ const seedDatabase = async () => {
       // Add thought ID to user's thoughts array
       await User.findByIdAndUpdate(user._id, { $push: { thoughts: newThought._id } });
 
-      console.log(`💡 Thought added for ${user.username}: "${newThought.thoughtText}"`);
+      console.log(`💡 Thought added for <span class="math-inline">\{user\.username\}\: "</span>{newThought.thoughtText}"`);
     }
 
     console.log('🌱 Database successfully seeded');
   } catch (err) {
     console.error('❌ Seeding failed:', err);
-  } finally {
-    mongoose.connection.close();
   }
 };
-
-// Run seed function
-seedDatabase();

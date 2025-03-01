@@ -1,5 +1,5 @@
 import express from 'express';
-import { connectDB, mongoose } from './config/connection'; // Import connectDB and mongoose
+import { connectDB, mongoose } from './config/connection.js'; // Import connectDB and mongoose
 import dotenv from 'dotenv';
 import routes from './routes/index.js';
 
