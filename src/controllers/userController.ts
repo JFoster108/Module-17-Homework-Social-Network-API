@@ -3,7 +3,7 @@ import User from '../models/User';
 import Thought from '../models/Thought';
 
   // GET all users
-  export const getUsers = async (req: Request, res: Response) => {
+  export const getUsers = async (_req: Request, res: Response) => {
     try {
       const users = await User.find().populate('thoughts').populate('friends');
       res.json(users);

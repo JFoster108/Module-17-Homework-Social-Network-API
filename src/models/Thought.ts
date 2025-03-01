@@ -17,9 +17,6 @@ const thoughtSchema = new Schema<IThought>(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (timestamp: unknown) => {
-        return timestamp ? new Date(timestamp as number).toLocaleString() : '';
-      },
     },
     username: { type: String, required: true },
     reactions: [reactionSchema],

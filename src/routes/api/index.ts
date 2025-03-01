@@ -6,4 +6,4 @@ const router = Router()
 router.use("/users", userRoutes)
 router.use("/thoughts", thoughtRoutes)
 
-export default Router
+export default router

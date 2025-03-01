@@ -1,5 +1,4 @@
 import { Schema, Types } from 'mongoose';
-import { dateFormat } from '../utils/dateformat';
 
 // Define TypeScript interface for Reaction
 export interface IReaction extends Document{
@@ -18,7 +17,6 @@ const reactionSchema = new Schema<IReaction>(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (timestamp: any) => dateFormat(timestamp)
     },
   },
   {
